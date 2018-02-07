@@ -3,7 +3,7 @@
     {
         "normal" :
         {
-            "model" : "tutorial:cheeseblock"
+            "model" : "tutorial:cheese_block"
         }
     }
 }

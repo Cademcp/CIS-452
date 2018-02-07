@@ -1,5 +1,7 @@
-"parent" : "item/generated",
-"textures" : 
-    {
-        "layer0" : "tutorial:items/cheese"
-    }
+{
+    "parent" : "item/generated",
+    "textures" : 
+        {
+            "layer0" : "tutorial:items/cheese"
+        }
+}
