@@ -12,4 +12,6 @@ public class ModBlocks {
 	public static List<Block> BLOCKS = new ArrayList<Block>();
 	
 	public static Block CHEESE_BLOCK = new BlockBase("cheese_block", Material.IRON);
+	
+	public static Block CHAIR_Block = new BlockBase("chair_block", Material.IRON);
 }

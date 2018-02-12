@@ -1,0 +1,9 @@
+{
+    "variants" :
+    {
+        "normal" :
+        {
+            "model" : "tutorial:chair_block"
+        }
+    }
+}
