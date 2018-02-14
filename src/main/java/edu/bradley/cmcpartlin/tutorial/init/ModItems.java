@@ -22,5 +22,6 @@ public class ModItems {
 	
 	public static List<Item> ITEMS = new ArrayList<Item>();
 	public static Item cheese = new ItemBase("cheese");
+	public static Item dragon_blade = new ItemBase("dragon_blade");
 	
 }

@@ -14,4 +14,6 @@ public class ModBlocks {
 	public static Block CHEESE_BLOCK = new BlockBase("cheese_block", Material.IRON);
 	
 	public static Block CHAIR_Block = new BlockBase("chair_block", Material.IRON);
+	
+	public static Block DRAGON_SCALE = new BlockBase("dragon_scale", Material.IRON);
 }
