@@ -1,2 +1,7 @@
 item.cheese.name=Cheese
 tile.cheese_block.name=Cheese Block
+tile.chair_block.name=Chair
+tile.dragon_scale.name=Dragon Scale
+item.dragon_blade.name=Dragon Blade
+item.cracker.name=Cracker
+item.cheese_cracker.name=Cheese and Crackers

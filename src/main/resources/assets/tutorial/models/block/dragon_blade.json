@@ -1,9 +1,9 @@
 {
     "__comment": "Model generated using MrCrayfish's Model Creator (http://mrcrayfish.com/modelcreator/)",
     "textures": {
-        "0": "blocks/black",
-        "1": "blocks/spike",
-        "2": "blade"
+        "0": "tutorial:blocks/black",
+        "1": "tutorial:blocks/spike",
+        "2": "tutorial:blocks/blade"
     },
     "elements": [
         {

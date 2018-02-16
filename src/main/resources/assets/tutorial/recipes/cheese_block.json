@@ -1,0 +1,24 @@
+{
+    "type" : "minecraft:crafting_shaped",
+    
+    "pattern" :
+    [
+        "CCC",
+        "CCC",
+        "CCC"
+    ],
+    
+    "key" :
+    {
+        "C" :
+        {
+            "item" : "tutorial:cheese"
+        }
+        
+    },
+    
+    "result" : 
+    {
+        "item" : "tutorial:cheese_block"
+    }
+}
