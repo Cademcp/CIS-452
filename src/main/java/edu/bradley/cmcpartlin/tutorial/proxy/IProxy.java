@@ -4,4 +4,5 @@ import net.minecraft.item.Item;
 
 public interface IProxy {
 	public void registerItemRenderer(Item itemBase, int i, String name);
+	public void registerKeyBindings();
 }

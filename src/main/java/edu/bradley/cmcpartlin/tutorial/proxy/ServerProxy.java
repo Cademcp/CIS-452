@@ -10,4 +10,10 @@ public class ServerProxy implements IProxy {
 		
 	}
 
+	@Override
+	public void registerKeyBindings() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

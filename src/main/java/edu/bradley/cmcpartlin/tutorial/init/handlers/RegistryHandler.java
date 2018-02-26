@@ -1,7 +1,10 @@
-package edu.bradley.cmcpartlin.tutorial.init;
+package edu.bradley.cmcpartlin.tutorial.init.handlers;
 
 import com.example.examplemod.Reference;
 
+import edu.bradley.cmcpartlin.tutorial.init.IHasModel;
+import edu.bradley.cmcpartlin.tutorial.init.ModBlocks;
+import edu.bradley.cmcpartlin.tutorial.init.ModItems;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.event.ModelRegistryEvent;

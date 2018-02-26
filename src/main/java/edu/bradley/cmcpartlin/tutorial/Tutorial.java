@@ -2,6 +2,7 @@ package edu.bradley.cmcpartlin.tutorial;
 
 import com.example.examplemod.Reference;
 
+import edu.bradley.cmcpartlin.tutorial.init.MessageManager;
 import edu.bradley.cmcpartlin.tutorial.proxy.IProxy;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -22,11 +23,12 @@ public class Tutorial {
 	
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
-		System.out.println("preinit");
+		MessageManager.registerMessages("tutorial_channel");
 	}
 	
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
+		proxy.registerKeyBindings();
 		
 	}
 	
