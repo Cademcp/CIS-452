@@ -7,10 +7,13 @@ import net.minecraftforge.fml.client.registry.ClientRegistry;
 
 public class KeyBindings {
 	public static KeyBinding eventKey;
+	public static KeyBinding explodeKey;
 	
 	public static void init() {
 		eventKey = new KeyBinding("key." + Reference.MOD_ID + ".event", Keyboard.KEY_G, "key.categories" + Reference.MOD_ID);
 		ClientRegistry.registerKeyBinding(eventKey);
+		explodeKey = new KeyBinding("key." + Reference.MOD_ID + ".explode", Keyboard.KEY_H, "key.categories" + Reference.MOD_ID);
+		ClientRegistry.registerKeyBinding(explodeKey);
 	}
 
 }

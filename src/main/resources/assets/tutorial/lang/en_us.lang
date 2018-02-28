@@ -5,5 +5,6 @@ tile.dragon_scale.name=Dragon Scale
 item.dragon_blade.name=Dragon Blade
 item.cracker.name=Cracker
 item.cheese_cracker.name=Cheese and Crackers
-key.categories.tutorial=Custom
+key.categoriestutorial=Custom
 key.tutorial.event=Query Block
+key.tutorial.explode=Explosion
