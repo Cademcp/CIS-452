@@ -7,6 +7,7 @@ import com.example.examplemod.Reference;
 
 import edu.bradley.cmcpartlin.tutorial.ItemBase;
 import edu.bradley.cmcpartlin.tutorial.items.ItemCheese;
+import edu.bradley.cmcpartlin.tutorial.items.ItemWand;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
@@ -25,6 +26,7 @@ public class ModItems {
 	public static Item dragon_blade = new ItemBase("dragon_blade");
 	public static Item cracker = new ItemBase("cracker");
 	public static Item cheese_cracker = new ItemBase("cheese_cracker");
+	public static Item wand = new ItemWand("wand");
 	
 	
 }
