@@ -6,6 +6,7 @@ import javax.annotation.Nullable;
 
 import com.example.examplemod.Reference;
 
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagFloat;
@@ -15,6 +16,11 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
+import net.minecraftforge.event.AttachCapabilitiesEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerChangedDimensionEvent;
 
 public class CapabilityMaxHealth {
 	@CapabilityInject(IMaxHealth.class)
@@ -40,7 +46,7 @@ public class CapabilityMaxHealth {
 
 			@Override
 			public NBTBase writeNBT(Capability<IMaxHealth> capability, IMaxHealth instance, EnumFacing side) {
-				return new NBTTagFloat(instance.getBonusHealth());
+				return new NBTTagFloat(instance.getBonusMaxHealth());
 			}
 
 			@Override
@@ -63,8 +69,41 @@ public class CapabilityMaxHealth {
 		CapabilityManager.INSTANCE.register(IMaxHealth.class, new Storage(), new Factory());
 	}
 	
-	private static class EventHandler() {
+	@Mod.EventBusSubscriber(modid=Reference.MOD_ID)
+	private static class EventHandler {
 		
+		//attach to all living entities when they are constructed
+		@SubscribeEvent
+		public static void attachCapabilities(final AttachCapabilitiesEvent<Entity> event) {
+			if (event.getObject() instanceof EntityLivingBase) {
+				EntityLivingBase entity = (EntityLivingBase) event.getObject();
+				final MaxHealth maxHealth = new MaxHealth(entity);
+				ICapabilityProvider provider = createProvider(maxHealth);
+				event.addCapability(ID, provider);
+			}
+		}
+		
+		@SubscribeEvent
+		public static void playerClone(final PlayerEvent.Clone event) {
+			
+			//copy capability after death (or return from the end)
+			final IMaxHealth oldMaxHealth = getMaxHealth(event.getOriginal());
+			final IMaxHealth newMaxHealth = getMaxHealth(event.getEntityPlayer());
+			
+			if (newMaxHealth != null && oldMaxHealth != null) {
+				newMaxHealth.setBonusMaxHealth(oldMaxHealth.getBonusMaxHealth());
+			}
+		}
+		
+		@SubscribeEvent
+		public static void playerChangeDimension(final PlayerChangedDimensionEvent event) {
+			
+			final IMaxHealth maxHealth = getMaxHealth(event.player);
+			
+			if (maxHealth != null) {
+				maxHealth.synchronize(); //synchronize with watching clients
+			}
+		}
 	}
 
 }
