@@ -1,6 +1,8 @@
 package edu.bradley.cmcpartlin.tutorial.items;
 
 import edu.bradley.cmcpartlin.tutorial.ItemBase;
+import edu.bradley.cmcpartlin.tutorial.capabilities.CapabilityMaxHealth;
+import edu.bradley.cmcpartlin.tutorial.capabilities.IMaxHealth;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -19,11 +21,22 @@ public class ItemWand extends ItemBase {
 	public boolean itemInteractionForEntity(ItemStack stack, EntityPlayer playerIn, EntityLivingBase target,
 			EnumHand hand) {
 		if (!playerIn.world.isRemote) {
-			//on server side
-			playerIn.sendStatusMessage(new TextComponentString(TextFormatting.GREEN + "Hit Target:" + target.getName()), false);
+			final IMaxHealth maxHealth = CapabilityMaxHealth.getMaxHealth(target);
+			
+			if (maxHealth != null) {
+				//use sneak to allow us to raise/lower value
+				final float healthToAdd = playerIn.isSneaking() ? -1.0f : 1.0f;
+				
+				maxHealth.addBonusMaxHealth(healthToAdd);
+			}
+			
+			final float adjusted = maxHealth.getBonusMaxHealth();
+			System.out.println("MH   Current MH adjustment for " + target.getEntityId() + " is now " + adjusted);
+			
+			playerIn.sendStatusMessage(new TextComponentString(TextFormatting.GREEN + "Current MH adjustment for : " + target.getEntityId() + " is now " + adjusted), false);
 		}
-		return false;
+		return true;
 	}
-	
+
 
 }
