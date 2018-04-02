@@ -7,6 +7,7 @@ import com.example.examplemod.Reference;
 
 import edu.bradley.cmcpartlin.tutorial.ItemBase;
 import edu.bradley.cmcpartlin.tutorial.items.ItemCheese;
+import edu.bradley.cmcpartlin.tutorial.items.ItemDragonBlade;
 import edu.bradley.cmcpartlin.tutorial.items.ItemWand;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -23,7 +24,7 @@ public class ModItems {
 	
 	public static List<Item> ITEMS = new ArrayList<Item>();
 	public static Item cheese = new ItemBase("cheese");
-	public static Item dragon_blade = new ItemBase("dragon_blade");
+	public static Item dragon_blade = new ItemDragonBlade("dragon_blade");
 	public static Item cracker = new ItemBase("cracker");
 	public static Item cheese_cracker = new ItemBase("cheese_cracker");
 	public static Item wand = new ItemWand("wand");

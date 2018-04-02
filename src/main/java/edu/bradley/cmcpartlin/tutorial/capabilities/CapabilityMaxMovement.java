@@ -28,7 +28,6 @@ public class CapabilityMaxMovement {
 	public static final EnumFacing DEFAULT_FACING = null;
 	public static final ResourceLocation ID = new ResourceLocation(Reference.MOD_ID, "MaxMovement");
 	
-	//Capability only used with living entities
 	@Nullable
 	public static IMaxMovement getMaxMovement(final EntityLivingBase entity) {
 		if ((entity == null) || !entity.hasCapability(MAX_MOVEMENT_CAPABILITY, DEFAULT_FACING)) {
