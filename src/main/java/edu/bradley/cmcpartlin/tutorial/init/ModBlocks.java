@@ -17,4 +17,6 @@ public class ModBlocks {
 	public static Block CHAIR_BLOCK = new BlockNonOpaque("chair_block", Material.IRON);
 	
 	public static Block DRAGON_SCALE = new BlockNonOpaque("dragon_scale", Material.IRON);
+	
+	
 }
