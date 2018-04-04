@@ -47,7 +47,6 @@ public class MaxMovement implements IMaxMovement {
 	public void synchronize() {
 		World world = entity.getEntityWorld();
 		
-		//if we are on the server, update clients
 		if (entity != null && !world.isRemote) {
 			final IAttributeInstance entityMaxMovementAttribute = entity.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED);
 			

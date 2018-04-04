@@ -18,5 +18,7 @@ public class ModBlocks {
 	
 	public static Block DRAGON_SCALE = new BlockNonOpaque("dragon_scale", Material.IRON);
 	
+	public static Block JEWELRY_TABLE = new BlockNonOpaque("jewelry_table", Material.IRON);
+	
 	
 }
