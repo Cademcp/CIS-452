@@ -2,15 +2,19 @@ package TileEntities;
 
 import javax.annotation.Nullable;
 
+import edu.bradley.cmcpartlin.tutorial.inventory.ContainerJewelryTable;
+import edu.bradley.cmcpartlin.tutorial.inventory.IContainerCallBacks;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
-public class TileEntityJewelryTable extends TileEntity implements ITickable {
+public class TileEntityJewelryTable extends TileEntity implements ITickable, IContainerCallBacks {
 
 	private static final int RING_TICKS = 100;		//5 seconds
 	private int timeRemaining = 0;					//ticks to make current item
@@ -53,8 +57,9 @@ public class TileEntityJewelryTable extends TileEntity implements ITickable {
 	}
 	
 	public ContainerJewelryTable createContainer(final EntityPlayer player) {
+		final IItemHandler playerInventory = (IItemHandler) player.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.UP);
 		
-		
+		return new ContainerJewelryTable(playerInventory, inventory, player, this);
 	}
 	
 	
@@ -63,6 +68,24 @@ public class TileEntityJewelryTable extends TileEntity implements ITickable {
 	public void update() {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public void onContainerOpened(EntityPlayer player) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onContainerClosed(EntityPlayer player) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean isUsableByPlayer(EntityPlayer player) {
+		return this.world.getTileEntity(this.pos) == this &&
+				player.getDistanceSq(this.pos.getX() + 0.5, this.pos.getY() + 0.5, this.pos.getZ() + 0.5) <= 64;
 	}
 
 }

@@ -5,12 +5,15 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
 public class ContainerJewelryTable extends Container {
 
+	private final IContainerCallBacks callbacks;	//object to send callbacks to
+	
 	private final IItemHandler playerInventory;
 	private final IItemHandler tableInventory;
 	
@@ -25,9 +28,14 @@ public class ContainerJewelryTable extends Container {
 	private static final int TOTAL_PLAYER_SLOTS = 4 * SLOTS_PER_ROW;	//4 rows in a player inventory * num of slots in each row
 	private static final int TOTAL_CONTAINER_SLOTS = TileEntityJewelryTable.MAX_SLOTS + TOTAL_PLAYER_SLOTS;	//3 slots in jewelry table + 36 slots in player
 	
-	public ContainerJewelryTable(final IItemHandler playerInventory, final IItemHandler tableInventory, final EntityPlayer player) {
+	public ContainerJewelryTable(final IItemHandler playerInventory, final IItemHandler tableInventory, final EntityPlayer player, final IContainerCallBacks callbacks) {
 		this.playerInventory = playerInventory;
 		this.tableInventory = tableInventory;
+		
+		this.callbacks = callbacks;
+		
+		//The container is constructed when the player interacts with the block
+		callbacks.onContainerOpened(player);
 		
 		//using anonymous class to override onSlotChanged
 		addSlotToContainer(new SlotItemHandler(tableInventory, TileEntityJewelryTable.GEM_SLOT, 17, 12) 
@@ -93,19 +101,65 @@ public class ContainerJewelryTable extends Container {
 			originalStack = stack.copy();
 			
 			if (index == TileEntityJewelryTable.OUTPUT_SLOT) {
+				//slots are in container order, 0-2 are table, 3-38 are play inventory
+				//so attempt to move output into the player inventory
+				if (!this.mergeItemStack(stack, TileEntityJewelryTable.MAX_SLOTS, TOTAL_CONTAINER_SLOTS, false)) {
+					return ItemStack.EMPTY;		//cannot fit in inventory, abort transfer
+				}
+			}
+			
+			else if (index != TileEntityJewelryTable.GEM_SLOT && index != TileEntityJewelryTable.MATERIAL_SLOT) {
+				//transfer from player inventory to the table
+				
+				Item toMove = stack.getItem();
+				if (toMove == Items.IRON_INGOT || toMove == Items.GOLD_INGOT) {
+					if (!this.mergeItemStack(stack, TileEntityJewelryTable.MATERIAL_SLOT, TileEntityJewelryTable.MATERIAL_SLOT + 1, false)) {
+						return ItemStack.EMPTY;
+					}
+				}
+				if (toMove == Items.DIAMOND || toMove == Items.EMERALD) {
+					if (!this.mergeItemStack(stack, TileEntityJewelryTable.GEM_SLOT, TileEntityJewelryTable.GEM_SLOT + 1, false)) {
+						return ItemStack.EMPTY;
+					}
+				}
+			}
+			else {
+				//one of the inputs being transferred back to player inventory
 				if (!this.mergeItemStack(stack, TileEntityJewelryTable.MAX_SLOTS, TOTAL_CONTAINER_SLOTS, false)) {
 					return ItemStack.EMPTY;
 				}
 			}
+			if (stack.isEmpty()) {
+				slot.putStack(ItemStack.EMPTY);
+			} else {
+				slot.onSlotChanged();
+			}
+			if (stack.getCount() == originalStack.getCount()) {
+				return ItemStack.EMPTY;
+			}
+			slot.onTake(playerIn, stack);
 		}
-		
-		
+		return originalStack;
 	}
 	
 	@Override
 	public boolean canInteractWith(EntityPlayer playerIn) {
-		// TODO Auto-generated method stub
-		return false;
+		return callbacks.isUsableByPlayer(playerIn);
+	}
+	
+	@Override
+	public void onContainerClosed(EntityPlayer playerIn) {
+		super.onContainerClosed(playerIn);
+		
+		callbacks.onContainerClosed(playerIn);
+	}
+	
+	public IItemHandler getPlayerInventory() {
+		return playerInventory;
+	}
+	
+	public IItemHandler getTableInventory() {
+		return tableInventory;
 	}
 
 }
