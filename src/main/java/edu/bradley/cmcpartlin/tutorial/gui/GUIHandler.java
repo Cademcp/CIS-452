@@ -33,6 +33,7 @@ public class GUIHandler implements IGuiHandler {
 	}
 
 	@Override
+	@Nullable
 	public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
 		final TileEntity tileEntity = world.getTileEntity(new BlockPos(x,y,z));
 		

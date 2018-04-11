@@ -2,6 +2,7 @@ package edu.bradley.cmcpartlin.tutorial;
 
 import com.example.examplemod.Reference;
 
+import edu.bradley.cmcpartlin.tutorial.gui.GUIHandler;
 import edu.bradley.cmcpartlin.tutorial.init.MessageManager;
 import edu.bradley.cmcpartlin.tutorial.init.ModCapabilities;
 import edu.bradley.cmcpartlin.tutorial.proxy.IProxy;
@@ -12,6 +13,7 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 
 @Mod(modid = Reference.MOD_ID, name = Reference.NAME, version = Reference.VERSION, acceptedMinecraftVersions = Reference.ACCEPTED_VERSIONS)
 public class Tutorial {
@@ -31,6 +33,7 @@ public class Tutorial {
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
 		proxy.registerKeyBindings();
+		NetworkRegistry.INSTANCE.registerGuiHandler(this, new GUIHandler());
 		
 	}
 	

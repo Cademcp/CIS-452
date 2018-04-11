@@ -1,5 +1,5 @@
 package edu.bradley.cmcpartlin.tutorial.gui;
 
-public enum GuiIDs {
-	JEWELRY_TABLE 
+public class GuiIDs {
+	public static final int JEWELRY_TABLE = 0; 
 }
