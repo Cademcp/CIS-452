@@ -28,7 +28,7 @@ public class ModItems {
 	public static Item cracker = new ItemBase("cracker");
 	public static Item cheese_cracker = new ItemBase("cheese_cracker");
 	public static Item wand = new ItemWand("wand");
-	public static Item ring1;
+	public static Item ring = new ItemBase("ring_1");
 	
 	
 }

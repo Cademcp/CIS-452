@@ -52,6 +52,7 @@ public class TileEntityJewelryTable extends TileEntity implements ITickable, ICo
 	@Override
 	public void readFromNBT(NBTTagCompound compound) {
 		inventory.deserializeNBT(compound.getCompoundTag("inventory"));
+		timeRemaining = compound.getInteger("craftTime");
 		if (timeRemaining != 0) {
 			inUse = true;
 		}
@@ -74,7 +75,7 @@ public class TileEntityJewelryTable extends TileEntity implements ITickable, ICo
 	
 	
 	private void produceResult() {
-		ItemStack result = new ItemStack(ModItems.ring1);
+		ItemStack result = new ItemStack(ModItems.ring);
 		ItemStack outputStack = inventory.getStackInSlot(OUTPUT_SLOT);
 		ItemStack materialStack = inventory.getStackInSlot(MATERIAL_SLOT);
 		ItemStack gemStack = inventory.getStackInSlot(GEM_SLOT);
@@ -86,7 +87,7 @@ public class TileEntityJewelryTable extends TileEntity implements ITickable, ICo
 		if (outputStack.isEmpty()) {
 			System.out.println("JT:    assigning new stack to slot");
 			inventory.setStackInSlot(OUTPUT_SLOT, result);
-		} else if (outputStack.getItem() == ModItems.ring1) {
+		} else if (outputStack.getItem() == ModItems.ring) {
 			System.out.println("JT:     inserting new item in exisiting stack");
 			System.out.println("JT:    count currently " + outputStack.getItem().getUnlocalizedName());
 			inventory.insertItem(OUTPUT_SLOT, result, false);
