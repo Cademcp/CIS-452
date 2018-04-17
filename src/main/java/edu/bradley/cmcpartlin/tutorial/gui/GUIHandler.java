@@ -2,6 +2,7 @@ package edu.bradley.cmcpartlin.tutorial.gui;
 
 import javax.annotation.Nullable;
 
+import TileEntities.TileEntityDragonTable;
 import TileEntities.TileEntityJewelryTable;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
@@ -22,10 +23,10 @@ public class GUIHandler implements IGuiHandler {
 		final TileEntity tileEntity = world.getTileEntity(new BlockPos(x,y,z));
 		
 		switch(ID) {
-		case GuiIDs.JEWELRY_TABLE:
+		case GuiIDs.DRAGON_TABLE:
 			if (tileEntity != null) {
 				System.out.println("JT:    server-side container create");
-				return ((TileEntityJewelryTable) tileEntity).createContainer(player);
+				return ((TileEntityDragonTable) tileEntity).createContainer(player);
 			}
 			break;
 		}
@@ -38,12 +39,12 @@ public class GUIHandler implements IGuiHandler {
 		final TileEntity tileEntity = world.getTileEntity(new BlockPos(x,y,z));
 		
 		switch(ID) {
-		case GuiIDs.JEWELRY_TABLE:
+		case GuiIDs.DRAGON_TABLE:
 			if (tileEntity != null) {
-				TileEntityJewelryTable table = (TileEntityJewelryTable) tileEntity;
+				TileEntityDragonTable table = (TileEntityDragonTable) tileEntity;
 				
 				System.out.println("JT:    client-side container create");
-				return new GUIJewelryTable(table.createContainer(player));
+				return new GUIDragonTable(table.createContainer(player));
 			}
 		}
 		return null;
