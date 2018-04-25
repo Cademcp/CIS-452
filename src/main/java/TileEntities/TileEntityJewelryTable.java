@@ -1,5 +1,7 @@
 package TileEntities;
 
+import java.util.Random;
+
 import javax.annotation.Nullable;
 
 import edu.bradley.cmcpartlin.tutorial.init.ModItems;
@@ -11,6 +13,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.WeightedRandom.Item;
 import net.minecraftforge.common.capabilities.Capability;
@@ -96,6 +99,9 @@ public class TileEntityJewelryTable extends TileEntity implements ITickable, ICo
 	
 	@Override
 	public void update() {
+		
+		generateParticles();
+		
 		if (inUse) {
 			timeRemaining--;
 			System.out.println("JT:     tick down crafting timer to " + timeRemaining);
@@ -159,6 +165,22 @@ public class TileEntityJewelryTable extends TileEntity implements ITickable, ICo
 	public boolean isUsableByPlayer(EntityPlayer player) {
 		return this.world.getTileEntity(this.pos) == this &&
 				player.getDistanceSq(this.pos.getX() + 0.5, this.pos.getY() + 0.5, this.pos.getZ() + 0.5) <= 64;
+	}
+	
+	private void generateParticles() {
+		Random rng = new Random();
+		
+		if (rng.nextInt(10) == 0) {
+			double x = pos.getX() + 0.5;
+			double y = pos.getY() + 1.5;
+			double z = pos.getZ() + 0.5;
+			
+			double xSpeed = rng.nextGaussian() * 0.02d;
+			double ySpeed = rng.nextGaussian() * 0.02d;
+			double zSpeed = rng.nextGaussian() * 0.02d;
+			
+			this.world.spawnParticle(EnumParticleTypes.DRAGON_BREATH, x, y, z, xSpeed, ySpeed, zSpeed);
+		}
 	}
 
 }
