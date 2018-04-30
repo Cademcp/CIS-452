@@ -17,7 +17,7 @@ import net.minecraft.world.World;
 public class ParticleNumbers extends Particle {
 
 	
-	private static final ResourceLocation NUMBERS_TEXTURE = new ResourceLocation(Reference.MOD_ID, "particles/numbers.png");
+	private static final ResourceLocation NUMBERS_TEXTURE = new ResourceLocation(Reference.MOD_ID, "textures/particles/dragon_wings_up.png");
 	private static final VertexFormat VERTEX_FORMAT = (new VertexFormat()).addElement(DefaultVertexFormats.POSITION_3F).
 			addElement(DefaultVertexFormats.TEX_2F).addElement(DefaultVertexFormats.COLOR_4UB).addElement(DefaultVertexFormats.TEX_2S).
 			addElement(DefaultVertexFormats.NORMAL_3B).addElement(DefaultVertexFormats.PADDING_1B);

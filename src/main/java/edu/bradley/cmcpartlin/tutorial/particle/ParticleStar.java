@@ -13,7 +13,7 @@ import net.minecraft.world.World;
 
 public class ParticleStar extends Particle {
 
-	private final ResourceLocation starTexture = new ResourceLocation(Reference.MOD_ID, "particles/star");
+	private final ResourceLocation starTexture = new ResourceLocation(Reference.MOD_ID, "particles/dragon_wings_down");
 	
 	public ParticleStar(World worldIn, double x, double y, double z, double speedX,
 			double speedY, double speedZ) {

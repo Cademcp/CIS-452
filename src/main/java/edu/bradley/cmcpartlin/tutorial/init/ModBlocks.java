@@ -24,5 +24,6 @@ public class ModBlocks {
 	
 	public static Block DRAGON_TABLE = new BlockDragonTable("dragon_crafting", Material.WOOD);
 	
+	public static Block DRAGON_EGG = new BlockNonOpaque("dragon_egg", Material.WOOD);
 	
 }

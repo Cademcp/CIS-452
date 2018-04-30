@@ -30,7 +30,7 @@ public class RegistryHandler {
 	@SubscribeEvent
 	public static void onTextureStitch(TextureStitchEvent event) {
 		
-		ResourceLocation starTexture = new ResourceLocation(Reference.MOD_ID, "particles/star");
+		ResourceLocation starTexture = new ResourceLocation(Reference.MOD_ID, "particles/dragon_wings_down");
 		event.getMap().registerSprite(starTexture);
 	}
 	

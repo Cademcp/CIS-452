@@ -8,8 +8,10 @@ import edu.bradley.cmcpartlin.tutorial.init.ModItems;
 import edu.bradley.cmcpartlin.tutorial.inventory.ContainerDragonTable;
 import edu.bradley.cmcpartlin.tutorial.inventory.ContainerJewelryTable;
 import edu.bradley.cmcpartlin.tutorial.inventory.IContainerCallBacks;
+import edu.bradley.cmcpartlin.tutorial.particle.ParticleNumbers;
 import edu.bradley.cmcpartlin.tutorial.particle.ParticleStar;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -190,6 +192,8 @@ public class TileEntityDragonTable extends TileEntity implements ITickable, ICon
 			double zSpeed = rng.nextGaussian() * 0.02d;
 			
 			ParticleStar newEffect = new ParticleStar(this.world, x, y, z, xSpeed, ySpeed, zSpeed);
+			//TextureManager manager = Minecraft.getMinecraft().getTextureManager();
+			//ParticleNumbers newEffect = new ParticleNumbers(manager, this.world, x, y, z, xSpeed, ySpeed, zSpeed);
 			Minecraft.getMinecraft().effectRenderer.addEffect(newEffect);
 		}
 	}
