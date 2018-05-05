@@ -11,11 +11,11 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
-public class ParticleStar extends Particle {
+public class ParticleDragon extends Particle {
 
-	private final ResourceLocation starTexture = new ResourceLocation(Reference.MOD_ID, "particles/dragon_wings_up.png");
+	private final ResourceLocation dragonTexture = new ResourceLocation(Reference.MOD_ID, "particles/dragon_wings_down");
 	
-	public ParticleStar(World worldIn, double x, double y, double z, double speedX,
+	public ParticleDragon(World worldIn, double x, double y, double z, double speedX,
 			double speedY, double speedZ) {
 		super(worldIn, x, y, z, speedX, speedY, speedZ);
 		
@@ -26,14 +26,14 @@ public class ParticleStar extends Particle {
 		this.particleBlue = ((float) (Math.random() * 0.2) + 0.5f);
 		this.particleAlpha = ALPHA_MAX;
 		
-		this.particleMaxAge = 20;
+		this.particleMaxAge = 40;
 		
 		//the particle's velocity vector
 		motionX = speedX;
 		motionY = speedY;
 		motionZ = speedZ;
 		
-		TextureAtlasSprite sprite = Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(starTexture.toString());
+		TextureAtlasSprite sprite = Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(dragonTexture.toString());
 		setParticleTexture(sprite);
 	}
 

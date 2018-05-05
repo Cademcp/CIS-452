@@ -2,6 +2,7 @@ package edu.bradley.cmcpartlin.tutorial;
 
 import com.example.examplemod.Reference;
 
+import TileEntities.TileEntityDragonTable;
 import edu.bradley.cmcpartlin.tutorial.gui.GUIHandler;
 import edu.bradley.cmcpartlin.tutorial.init.MessageManager;
 import edu.bradley.cmcpartlin.tutorial.init.ModCapabilities;
@@ -14,6 +15,7 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 @Mod(modid = Reference.MOD_ID, name = Reference.NAME, version = Reference.VERSION, acceptedMinecraftVersions = Reference.ACCEPTED_VERSIONS)
 public class Tutorial {
@@ -28,6 +30,7 @@ public class Tutorial {
 	public void preInit(FMLPreInitializationEvent event) {
 		ModCapabilities.registerCapabilities();
 		MessageManager.registerMessages("tutorial_channel");
+		GameRegistry.registerTileEntity(TileEntityDragonTable.class, "dragon_table");
 	}
 	
 	@EventHandler

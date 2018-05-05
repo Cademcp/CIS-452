@@ -8,6 +8,7 @@ import edu.bradley.cmcpartlin.tutorial.init.ModItems;
 import edu.bradley.cmcpartlin.tutorial.inventory.ContainerDragonTable;
 import edu.bradley.cmcpartlin.tutorial.inventory.ContainerJewelryTable;
 import edu.bradley.cmcpartlin.tutorial.inventory.IContainerCallBacks;
+import edu.bradley.cmcpartlin.tutorial.particle.ParticleDragon;
 import edu.bradley.cmcpartlin.tutorial.particle.ParticleNumbers;
 import edu.bradley.cmcpartlin.tutorial.particle.ParticleStar;
 import net.minecraft.client.Minecraft;
@@ -42,7 +43,7 @@ public class TileEntityDragonTable extends TileEntity implements ITickable, ICon
 	private ItemStackHandler inventory = new ItemStackHandler(MAX_SLOTS);
 	
 	@Override
-	public boolean hasCapability(Capability<?> capability, EnumFacing facing) {
+	public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
 	
 		return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY || super.hasCapability(capability, facing);
 	}
@@ -66,7 +67,7 @@ public class TileEntityDragonTable extends TileEntity implements ITickable, ICon
 		}
 		super.readFromNBT(compound);
 	}
-	
+
 	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound compound) {
 		compound.setTag("inventory", inventory.serializeNBT());
@@ -187,15 +188,25 @@ public class TileEntityDragonTable extends TileEntity implements ITickable, ICon
 			double y = pos.getY() + 1.5;
 			double z = pos.getZ() + 0.5;
 			
+			double x1 = pos.getX();
+			double y1 = pos.getY();
+			double z1 = pos.getZ();
+			
 			double xSpeed = rng.nextGaussian() * 0.02d;
 			double ySpeed = rng.nextGaussian() * 0.02d;
 			double zSpeed = rng.nextGaussian() * 0.02d;
 			
-			ParticleStar newEffect = new ParticleStar(this.world, x, y, z, xSpeed, ySpeed, zSpeed);
-			//TextureManager manager = Minecraft.getMinecraft().getTextureManager();
-			//ParticleNumbers newEffect = new ParticleNumbers(manager, this.world, x, y, z, xSpeed, ySpeed, zSpeed);
+			double xSpeed1 = rng.nextGaussian() * 0.10d;
+			double ySpeed1 = rng.nextGaussian() * 0.10d;
+			double zSpeed1 = rng.nextGaussian() * 0.10d;
+			
+			//ParticleStar newEffect = new ParticleStar(this.world, x, y, z, xSpeed, ySpeed, zSpeed);
+			//ParticleDragon newEffect1 = new ParticleDragon(this.world, x1, y1, z1, xSpeed1, ySpeed1, zSpeed1);
+			TextureManager manager = Minecraft.getMinecraft().getTextureManager();
+			ParticleNumbers newEffect = new ParticleNumbers(manager, this.world, x1, y1, z1, xSpeed, ySpeed, zSpeed);
 			Minecraft.getMinecraft().effectRenderer.addEffect(newEffect);
+			//Minecraft.getMinecraft().effectRenderer.addEffect(newEffect1);
 		}
 	}
-
+	
 }

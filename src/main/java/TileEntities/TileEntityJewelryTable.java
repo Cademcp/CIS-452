@@ -7,6 +7,9 @@ import javax.annotation.Nullable;
 import edu.bradley.cmcpartlin.tutorial.init.ModItems;
 import edu.bradley.cmcpartlin.tutorial.inventory.ContainerJewelryTable;
 import edu.bradley.cmcpartlin.tutorial.inventory.IContainerCallBacks;
+import edu.bradley.cmcpartlin.tutorial.particle.ParticleNumbers;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -37,7 +40,7 @@ public class TileEntityJewelryTable extends TileEntity implements ITickable, ICo
 	private ItemStackHandler inventory = new ItemStackHandler(MAX_SLOTS);
 	
 	@Override
-	public boolean hasCapability(Capability<?> capability, EnumFacing facing) {
+	public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
 	
 		return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY || super.hasCapability(capability, facing);
 	}
@@ -74,8 +77,7 @@ public class TileEntityJewelryTable extends TileEntity implements ITickable, ICo
 		
 		return new ContainerJewelryTable(playerInventory, inventory, player, this);
 	}
-	
-	
+
 	
 	private void produceResult() {
 		ItemStack result = new ItemStack(ModItems.ring);
@@ -179,8 +181,10 @@ public class TileEntityJewelryTable extends TileEntity implements ITickable, ICo
 			double ySpeed = rng.nextGaussian() * 0.02d;
 			double zSpeed = rng.nextGaussian() * 0.02d;
 			
-			this.world.spawnParticle(EnumParticleTypes.DRAGON_BREATH, x, y, z, xSpeed, ySpeed, zSpeed);
+			//this.world.spawnParticle(EnumParticleTypes.DRAGON_BREATH, x, y, z, xSpeed, ySpeed, zSpeed);
+			TextureManager manager = Minecraft.getMinecraft().getTextureManager();
+			ParticleNumbers newEffect = new ParticleNumbers(manager, this.world, x, y, z, xSpeed, ySpeed, zSpeed);
+			Minecraft.getMinecraft().effectRenderer.addEffect(newEffect);
+		}
 		}
 	}
-
-}
